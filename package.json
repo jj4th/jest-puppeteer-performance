@@ -1,0 +1,27 @@
+{
+  "private": true,
+  "scripts": {
+    "test": "jest"
+  },
+  "jest": {
+    "globalSetup": "./setup.js",
+    "globalTeardown": "./teardown.js",
+    "testEnvironment": "./puppeteer_environment.js",
+    "testRegex": "/tests/*\\.js$",
+    "moduleFileExtensions": [
+      "js",
+      "json",
+      "node"
+    ]
+  },
+  "devDependencies": {
+    "@types/fs-extra": "^5.0.0",
+    "@types/jest": "^22.0.1",
+    "@types/node": "^8.5.9",
+    "@types/puppeteer": "^0.13.9",
+    "fs-extra": "^5.0.0",
+    "jest": "^22.0.0",
+    "puppeteer": "^0.13.0",
+    "typescript": "^2.6.2"
+  }
+}
