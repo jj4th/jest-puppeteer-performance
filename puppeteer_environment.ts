@@ -6,7 +6,7 @@ import * as path from 'path';
 
 const DIR = path.join(os.tmpdir(), 'jest_puppeteer_global_setup');
 
-export class PuppeteerEnvironment extends NodeEnvironment {
+class PuppeteerEnvironment extends NodeEnvironment {
   async setup() {
     console.log('Setup Test Environment.');
     await super.setup();
@@ -19,3 +19,5 @@ export class PuppeteerEnvironment extends NodeEnvironment {
     })
   }
 }
+
+export = PuppeteerEnvironment;

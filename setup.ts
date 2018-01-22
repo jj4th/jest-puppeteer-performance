@@ -5,7 +5,7 @@ import * as path from 'path';
 
 const DIR = path.join(os.tmpdir(), 'jest_puppeteer_global_setup');
 
-export default async function() {
+export = async function() {
   console.log('Setup Puppeteer');
   const browser = await puppeteer.launch({});
   global.__BROWSER__ = browser;

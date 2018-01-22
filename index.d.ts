@@ -6,6 +6,11 @@ declare global {
             __BROWSER__: Puppeteer.Browser;
         }
     }
+    namespace jest {
+        interface Matchers<R> {
+            toPerform: () => Promise<void>;
+        }
+    }
 }
 
 export { };

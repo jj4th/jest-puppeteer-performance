@@ -5,7 +5,7 @@ import * as path from 'path';
 
 const DIR = path.join(os.tmpdir(), 'jest_puppeteer_global_setup');
 
-export default async function() {
+export = async function() {
   console.log('Teardown Puppeteer');
   await global.__BROWSER__.close();
   fs.removeSync(DIR);
