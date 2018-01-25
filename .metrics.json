@@ -17,5 +17,24 @@
         "JSHeapTotalSize": 9842688
       }
     ]
+  },
+  "/Users/j8154/git/jest-puppeteer-performance/built/test/test1.js": {
+    "Performance Test Should be performant": [
+      {
+        "Timestamp": 147853.942182,
+        "Documents": 3,
+        "Frames": 1,
+        "JSEventListeners": 5,
+        "Nodes": 75,
+        "LayoutCount": 1,
+        "RecalcStyleCount": 5,
+        "LayoutDuration": 0.039413999998942,
+        "RecalcStyleDuration": 0.00373699999181554,
+        "ScriptDuration": 0.0703169999760576,
+        "TaskDuration": 0.156892999919364,
+        "JSHeapUsedSize": 5304296,
+        "JSHeapTotalSize": 9842688
+      }
+    ]
   }
 }
