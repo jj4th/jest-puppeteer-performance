@@ -7,7 +7,7 @@ const DIR = path.join(os.tmpdir(), 'jest_puppeteer_global_setup');
 
 export = async function() {
   console.log('Setup Puppeteer');
-  const browser = await puppeteer.launch({headless:false});
+  const browser = await puppeteer.launch();
   global.__BROWSER__ = browser;
   fs.mkdirpSync(DIR);
   fs.writeFileSync(path.join(DIR, 'wsEndpoint'), browser.wsEndpoint());
