@@ -1,7 +1,8 @@
 {
   "private": true,
   "scripts": {
-    "test": "jest"
+    "test": "jest",
+    "build": "tsc"
   },
   "jest": {
     "globalSetup": "./setup.js",
