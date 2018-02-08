@@ -4,11 +4,8 @@
     "test": "jest",
     "build": "tsc; mv built/src/* built; rmdir built/src"
   },
+  "main": "built/index.js",
   "jest": {
-    "globalSetup": "./built/setup.js",
-    "globalTeardown": "./built/teardown.js",
-    "testEnvironment": "./built/puppeteer_environment.js",
-    "setupTestFrameworkScriptFile": "./built/to-perform.js",
     "testRegex": "built/test/.*\\.js$",
     "moduleFileExtensions": [
       "js",
@@ -18,12 +15,15 @@
   },
   "devDependencies": {
     "@types/fs-extra": "^5.0.0",
-    "@types/jest": "^22.0.1",
+    "@types/jest": "^22.1.1",
     "@types/node": "^8.5.9",
-    "@types/puppeteer": "^0.13.9",
+    "@types/puppeteer": "^0.13.10",
     "fs-extra": "^5.0.0",
     "jest": "^22.0.0",
+    "typescript": "^2.7.1"
+  },
+  "dependencies": {
     "puppeteer": "^0.13.0",
-    "typescript": "^2.6.2"
+    "stats-lite": "^2.1.0"
   }
 }

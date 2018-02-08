@@ -19,7 +19,11 @@ node_modules/
 .env
 
 # built files
+built/
 *.js
 
 # Metrics file
 .metrics.json
+
+# VSCode
+.vscode/
