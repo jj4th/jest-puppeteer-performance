@@ -18,10 +18,13 @@
     "@types/puppeteer": "^0.13.10",
     "fs-extra": "^5.0.0",
     "jest": "^22.0.0",
+    "puppeteer": "^0.13.0",
     "typescript": "^2.7.1"
   },
+  "peerDependencies": {
+    "puppeteer": "^0.13.0"
+  },
   "dependencies": {
-    "puppeteer": "^0.13.0",
     "stats-lite": "^2.1.0"
   },
   "name": "jest-puppeteer-performance",
