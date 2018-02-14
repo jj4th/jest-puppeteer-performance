@@ -50,7 +50,7 @@ export class Metrics {
         thresholds: {
             '*': {
                 limit: 2,
-                type: Metrics.THRESHOLD.StdDev,
+                type: Metrics.THRESHOLD.StDev,
             }
         }
     }
@@ -115,7 +115,7 @@ export class Metrics {
             } else if (threshold.type === Metrics.THRESHOLD.Percentage) {
                 limit *= Math.max(...values);
 
-            } else if (threshold.type === Metrics.THRESHOLD.StdDev) {
+            } else if (threshold.type === Metrics.THRESHOLD.StDev) {
                 limit *= stats.stdev(values);
                 limit += stats.mean(values);
             }
@@ -142,9 +142,9 @@ export class Metrics {
 
 export namespace Metrics {
     export enum THRESHOLD {
-        Absolute = 0,
-        Percentage,
-        StdDev,
+        Absolute = 'absolute',
+        Percentage = 'percentage',
+        StDev = 'stdev',
     }
     export enum KEYS {
         Timestamp = 'Timestamp',
