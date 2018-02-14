@@ -1,8 +1,6 @@
-{
-  "private": true,
-  "scripts": {
+{  "scripts": {
     "test": "jest",
-    "build": "tsc; mv built/src/* built; rmdir built/src"
+    "build": "tsc"
   },
   "main": "built/index.js",
   "jest": {
@@ -25,5 +23,28 @@
   "dependencies": {
     "puppeteer": "^0.13.0",
     "stats-lite": "^2.1.0"
-  }
+  },
+  "name": "jest-puppeteer-performance",
+  "description": "Automated UI Performance Testing with Jest and Puppeteer",
+  "version": "1.0.0",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/jj4th/jest-puppeteer-performance.git"
+  },
+  "keywords": [
+    "test",
+    "jest",
+    "performance",
+    "chromium",
+    "chrome",
+    "puppeteer",
+    "timing",
+    "metric"
+  ],
+  "author": "John J. Andrichak IV",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/jj4th/jest-puppeteer-performance/issues"
+  },
+  "homepage": "https://github.com/jj4th/jest-puppeteer-performance#readme"
 }

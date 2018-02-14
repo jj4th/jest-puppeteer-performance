@@ -1,5 +1,15 @@
 import * as puppeteer from 'puppeteer';
-import { Metrics, MetricsOptions, MetricsAnalysis } from './metrics';
+import { Metrics, ConsolidatedMetrics, MetricsOptions, MetricsAnalysis } from './metrics';
+import { getTimings } from './timings';
+
+export async function gatherMetrics(
+    page: puppeteer.Page,
+) {
+    let consolidated: Partial<ConsolidatedMetrics> = await page.metrics();
+    consolidated = {...consolidated, ... await page.evaluate(getTimings)}
+
+    return consolidated as ConsolidatedMetrics;
+}
 
 export async function analyze(
     received: puppeteer.Page,
@@ -13,7 +23,7 @@ export async function analyze(
     }
 
     const metrics = new Metrics(testPath, currentTestName, options);
-    let analysis = metrics.analyze(await received.metrics());
+    let analysis = metrics.analyze(await gatherMetrics(received));
     let pass = (analysis.length === 0);
 
     const message = () => {

@@ -23,7 +23,7 @@ built/
 *.js
 
 # Metrics file
-.metrics.json
+__metrics__
 
 # VSCode
 .vscode/

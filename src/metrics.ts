@@ -6,8 +6,10 @@ import * as stats from 'stats-lite';
 const METRICS_DIR = '__metrics__';
 const METRICS_EXT = '.metrics.json';
 
+export type ConsolidatedMetrics = Record<Metrics.KEYS, number>;
+
 interface MetricsJson {
-    [testName: string]: puppeteer.Metrics[]
+    [testName: string]: ConsolidatedMetrics[]
 }
 
 type CollectedMetrics = Record<Metrics.KEYS, number[]>;
@@ -37,7 +39,7 @@ export interface MetricsOptions {
 
 export class Metrics {
     private metricsJson: MetricsJson;
-    private metrics: puppeteer.Metrics[];
+    private metrics: ConsolidatedMetrics[];
     private metricsPath: string;
 
     options: MetricsOptions = {
@@ -84,7 +86,7 @@ export class Metrics {
     }
 
     analyze(
-        sample: puppeteer.Metrics
+        sample: ConsolidatedMetrics
     ): MetricsAnalysis[] {
         let results: MetricsAnalysis[] = [];
 
@@ -157,5 +159,18 @@ export namespace Metrics {
         TaskDuration = 'TaskDuration',
         JSHeapUsedSize = 'JSHeapUsedSize',
         JSHeapTotalSize = 'JSHeapTotalSize',
+        appcacheTime = 'appcacheTime',
+        connectTime = 'connectTime',
+        domReadyTime = 'domReadyTime',
+        firstPaint = 'firstPaint',
+        firstPaintTime = 'firstPaintTime',
+        initDomTreeTime = 'initDomTreeTime',
+        loadEventTime = 'loadEventTime',
+        loadTime = 'loadTime',
+        lookupDomainTime = 'lookupDomainTime',
+        readyStart = 'readyStart',
+        redirectTime = 'redirectTime',
+        requestTime = 'requestTime',
+        unloadEventTime = 'unloadEventTime',
     }
 }
