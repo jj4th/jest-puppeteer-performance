@@ -135,7 +135,8 @@ export class Metrics {
     }
 
     save(): void {
-        fs.outputJsonSync(this.metricsPath, this.metrics, {spaces: 2});
+        this.metricsJson[this.testPath] = this.metrics;
+        fs.outputJsonSync(this.metricsPath, this.metricsJson, {spaces: 2});
     }
 }
 
