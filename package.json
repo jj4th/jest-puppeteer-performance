@@ -1,7 +1,8 @@
 {
   "scripts": {
     "test": "jest",
-    "build": "tsc"
+    "build": "tsc",
+    "prepare": "npm run build"
   },
   "main": "built/index.js",
   "types": "built/index.d.ts",
