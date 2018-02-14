@@ -59,7 +59,7 @@ export class Metrics {
         Object.assign(this.options, {});
         this.metricsPath = this.pathFromTest(testPath);
         this.metricsJson = this.load();
-        this.metrics = this.metricsJson[testPath] || [];
+        this.metrics = this.metricsJson[testName] || [];
     }
 
     private collect(): CollectedMetrics {
@@ -135,7 +135,7 @@ export class Metrics {
     }
 
     save(): void {
-        this.metricsJson[this.testPath] = this.metrics;
+        this.metricsJson[this.testName] = this.metrics;
         fs.outputJsonSync(this.metricsPath, this.metricsJson, {spaces: 2});
     }
 }
