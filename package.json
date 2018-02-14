@@ -4,6 +4,7 @@
     "build": "tsc"
   },
   "main": "built/index.js",
+  "types": "built/index.d.ts",
   "jest": {
     "testRegex": "built/test/.*\\.js$",
     "moduleFileExtensions": [
