@@ -120,11 +120,13 @@ export class Metrics {
                 limit += stats.mean(values);
             }
 
-            results.push({
-                key,
-                value,
-                limit
-            });
+            if (value > limit) {
+                results.push({
+                    key,
+                    value,
+                    limit
+                });
+            }
         }
 
         if (this.metrics.length >= this.options.maxSamples) {
