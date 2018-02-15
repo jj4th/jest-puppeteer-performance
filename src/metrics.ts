@@ -96,7 +96,7 @@ export class Metrics {
         };
 
         const collected = this.collect();
-        const keys = (Object.keys(sample) as Metrics.KEYS[]).filter(key => this.options.exclude.includes(key));
+        const keys = (Object.keys(sample) as Metrics.KEYS[]).filter(key => !this.options.exclude.includes(key));
 
         for(const key of keys) {
             const threshold = this.options.thresholds[key] || this.options.thresholds['*'];
