@@ -1,6 +1,29 @@
 import * as puppeteer from 'puppeteer';
 import { Metrics, ConsolidatedMetrics, MetricsOptions, MetricsAnalysis } from './metrics';
 import { getTimings } from './timings';
+import { EventEmitter } from 'events';
+
+export enum EVENTS {
+    BASELINE = 'BASELINE',
+    METRICS = 'METRICS',
+    ANALYZED = 'ANALYZED',
+}
+
+export interface PerformanceEvent {
+    currentTestName: string,
+    testPath: string,
+    baseline: ConsolidatedMetrics[],
+    metrics?: ConsolidatedMetrics,
+    failed?: MetricsAnalysis[]
+}
+
+export class PerformanceEventEmitter extends EventEmitter {
+    emit (name: EVENTS, event: PerformanceEvent) {
+        return super.emit(name, event);
+    }
+}
+
+export const performanceEvents = new PerformanceEventEmitter();
 
 export async function gatherMetrics(
     page: puppeteer.Page,
@@ -23,14 +46,29 @@ export async function analyze(
     }
 
     const metrics = new Metrics(testPath, currentTestName, options);
-    let analysis = metrics.analyze(await gatherMetrics(received));
-    let pass = (analysis.length === 0);
-
-    const message = () => {
-        return analysis.map(result => `${result.key}: ${result.value} to be less than ${result.limit}.`).join('\n');
+    let event: PerformanceEvent = {
+        currentTestName,
+        testPath,
+        baseline: metrics.metrics
     };
 
-    if (pass) {
+    performanceEvents.emit(EVENTS.BASELINE, event);
+
+    const sample = await gatherMetrics(received);
+
+    event = {...event, metrics: sample};
+    performanceEvents.emit(EVENTS.METRICS, event)
+
+    let failed = metrics.analyze(sample);
+
+    event = {...event, failed};
+    performanceEvents.emit(EVENTS.ANALYZED, event);
+
+    const message = () => {
+        return failed.map(result => `${result.key}: ${result.value} to be less than ${result.limit}.`).join('\n');
+    };
+
+    if (failed.length === 0) {
         metrics.save();
     } else {
         throw message();
