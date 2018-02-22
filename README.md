@@ -2,18 +2,24 @@
 Automated UI Performance Testing with Jest and Puppeteer
 
 ## Installation
-This project has a peer dependency on puppeteer and is intended to be used with jest test runner.
+This project has a peer dependency on `puppeteer` and is intended to be used with `jest` test runner.
+
+Jest: https://github.com/facebook/jest
+
+Puppeteer: https://github.com/GoogleChrome/puppeteer
 
 ```shell
-npm install jest-puppeteer-performance
+npm install jest-puppeteer-performance puppeteer jest
 ```
+
+NOTE: We do not install `puppeteer` or `jest` because you will need to install them under your own project in order to use them in your source files and with your own tests.  `jest-puppeteer-performance` is not intended to take on the responsibility of providing a test runner, or headless browser.  This allows us to keep our package smaller and avoid installing multiple versions of these dependencies.
 
 ## Usage
 This module exports one function `analyzePerformance()`.  Here is an example of how to use it with the default options in a test.
 
 ```javascript
 import * as puppeteer from 'puppeteer';
-import { analyzePerformance } from '..';
+import { analyzePerformance } from 'jest-puppeteer-performance';
 
 describe('Performance Test', async () => {
     let page;
@@ -93,3 +99,38 @@ describe('Performance Test', async () => {
     redirectTime
     requestTime
     unloadEventTime
+
+## Contrib
+
+### New Relic
+We have provided a script for submitting results to [New Relic](https://newrelic.com/).  You will find the reporter under the `contrib` namespace.
+
+```javascript
+import * as puppeteer from 'puppeteer';
+import { analyzePerformance, performanceEvents, contrib } from 'jest-puppeteer-performance';
+
+let nrAPIKey = 'abcdefABCDEF012345-wXyZ';
+let nrCollectorURI = 'https://insights-collector.newrelic.com/v1/accounts/123456/events';
+
+describe('Performance Test', async () => {
+    let page;
+    let browser;
+    let newrelic;
+
+    beforeAll(async () => {
+        newrelic = new contrib.NewRelic(performanceEvents, nrAPIKey, nrCollectorURI);
+        browser = await puppeteer.launch({headless: false});
+        page = await browser.newPage();
+        await page.goto('http://example.net/example.html');
+    });
+
+    afterAll(async () => {
+        await browser.close();
+        await newrelic.send();
+    });
+
+    it('Should be performant', async () => {
+        await analyzePerformance(page);
+    });
+});
+```

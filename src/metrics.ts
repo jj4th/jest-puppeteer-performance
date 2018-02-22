@@ -39,7 +39,7 @@ export interface MetricsOptions {
 
 export class Metrics {
     private metricsJson: MetricsJson;
-    private metrics: ConsolidatedMetrics[];
+    public metrics: ConsolidatedMetrics[];
     private metricsPath: string;
 
     options: MetricsOptions = {
