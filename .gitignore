@@ -27,3 +27,6 @@ __metrics__
 
 # VSCode
 .vscode/
+
+# Trace files
+trace.json

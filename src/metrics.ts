@@ -91,7 +91,7 @@ export class Metrics {
         let results: MetricsAnalysis[] = [];
 
         if (this.metrics.length < this.options.minSamples) {
-            this.metrics.push(sample);
+            this.metrics.unshift(sample);
             return results;
         };
 
@@ -101,7 +101,7 @@ export class Metrics {
         for(const key of keys) {
             const threshold = this.options.thresholds[key] || this.options.thresholds['*'];
 
-            if (!threshold) {
+            if (!threshold || threshold.type === Metrics.THRESHOLD.None) {
                 continue;
             }
 
@@ -109,7 +109,10 @@ export class Metrics {
             const values = collected[key];
             let limit = threshold.limit || 0; // default is same as Metrics.THRESHOLD.Absolute
 
-            if (threshold.custom) {
+            if (threshold.type === Metrics.THRESHOLD.Custom) {
+                if (!threshold.custom) {
+                    throw 'Custom threshold set but no custom method provided.'
+                }
                 limit = threshold.custom(value, values);
 
             } else if (threshold.type === Metrics.THRESHOLD.Percentage) {
@@ -144,6 +147,8 @@ export class Metrics {
 
 export namespace Metrics {
     export enum THRESHOLD {
+        None = 'none',
+        Custom = 'custom',
         Absolute = 'absolute',
         Percentage = 'percentage',
         StDev = 'stdev',
@@ -167,6 +172,7 @@ export namespace Metrics {
         domReadyTime = 'domReadyTime',
         firstPaint = 'firstPaint',
         firstPaintTime = 'firstPaintTime',
+        firstContentfulPaintTime = 'firstContentfulPaintTime',
         initDomTreeTime = 'initDomTreeTime',
         loadEventTime = 'loadEventTime',
         loadTime = 'loadTime',
