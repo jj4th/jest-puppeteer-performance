@@ -17,10 +17,10 @@
     ]
   },
   "devDependencies": {
-    "@types/fs-extra": "^5.0.0",
+    "@types/fs-extra": "^5.0.4",
     "@types/jest": "^23.3.1",
-    "@types/node": "^8.5.9",
-    "@types/node-fetch": "^1.6.7",
+    "@types/node": "^8.10.28",
+    "@types/node-fetch": "^1.6.9",
     "@types/puppeteer": "^0.13.10",
     "http-server": "^0.11.1",
     "jest": "^23.5.0",
@@ -33,8 +33,9 @@
   },
   "dependencies": {
     "fs-extra": "^5.0.0",
+    "https-proxy-agent": "^2.2.1",
     "node-fetch": "^1.7.3",
-    "stats-lite": "^2.1.0"
+    "stats-lite": "^2.1.1"
   },
   "name": "jest-puppeteer-performance",
   "description": "Automated UI Performance Testing with Jest and Puppeteer",
