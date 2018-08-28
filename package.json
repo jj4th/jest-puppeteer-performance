@@ -18,14 +18,14 @@
   },
   "devDependencies": {
     "@types/fs-extra": "^5.0.0",
-    "@types/jest": "^22.1.1",
+    "@types/jest": "^23.3.1",
     "@types/node": "^8.5.9",
     "@types/node-fetch": "^1.6.7",
     "@types/puppeteer": "^0.13.10",
     "http-server": "^0.11.1",
-    "jest": "^22.0.0",
+    "jest": "^23.5.0",
     "puppeteer": "^0.13.0",
-    "typescript": "^2.7.1"
+    "typescript": "^3.0.1"
   },
   "peerDependencies": {
     "jest": "^22.0.0",
